@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>json Employes</title>
+</head>
+<body>
+
+<h1>JSON.parse()</h1>
+<hr>
+<div id="demo">...</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    // au chargement de la page
+    window.onload = loadDoc;
+
+    // Ajax avec JQuery
+    function loadDoc() {
+        $.ajax({
+            url: "cd_catalog.json",      
+            method: "GET",         
+            dataType: "json",      
+            success: function(CDs) {
+
+                for(let i = 0; i < CDs.length; i++) {
+                    let CD = CDs[i];
+                    console.log("CD #" + (i+1) + ":");
+                    for(let key in CD) {
+                        console.log("  " + key + ": " + CD[key]);
+                    }
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("Erreur AJAX : ", status, error);
+            }
+        });
+    };
+</script>
+
+</body>
+</html>

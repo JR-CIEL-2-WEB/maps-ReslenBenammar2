@@ -1,0 +1,95 @@
+<!DOCTYPE html >
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>json Employes</title>
+</head>
+<body>
+
+<h1>JRostand Reperes Stade</h1>
+<hr>
+<div id="map">...</div>
+<style type="text/css">
+    /* Always set the map height explicitly to define the size of the div
+     * element that contains the map. */
+    #map {
+        height: 100%;
+    }
+
+    /* Optional: Makes the sample page fill the window. */
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+</style>
+
+<script   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7Y32T_PJHZxYcK3BJYJFNwSl6cuvLXpo&callback=initMap"></script>
+<script  src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    // au chargement de la page
+    window.onload = loadDoc();
+
+
+    // Ajax avec JQuery
+        function loadDoc() {
+        $.ajax({
+                url: "markersJrostand.json",
+                method: "GET",
+                //data: { id : menuId },
+                dataType: "json",
+                success: function(markers){
+                // Boucle for classique
+                for (let i = 0; i < markers.length; i++) {
+                    let marker = markers[i];
+
+                    // Boucle for...in sur chaque marker
+                    for (let key in marker) {
+                    console.log(key + ": " + marker[key]);
+                    }
+                    console.log("___________");
+                }
+
+                // Création et affichage de la map
+                initMap(markers);
+                }
+
+        });
+    }
+
+   function initMap(markers) {
+  var options = {
+    center: new google.maps.LatLng(48.95930033308523, 2.5477890651742516),
+    zoom: 15,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+
+  var map = new google.maps.Map(document.getElementById("map"), options);
+
+  // Affichage des markers
+  for (let i = 0; i < markers.length; i++) {
+    new google.maps.Marker({
+      position: markers[i],
+      map: map
+    });
+  }
+
+  // ➕ Ajout de la polyline
+  const polyline = new google.maps.Polyline({
+    path: markers,
+    geodesic: true,
+    strokeColor: "#FF0000",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+
+  polyline.setMap(map); // on l'ajoute à la carte
+}
+
+
+</script>
+
+</body>
+</html>

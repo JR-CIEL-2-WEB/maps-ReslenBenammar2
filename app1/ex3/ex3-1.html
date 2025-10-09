@@ -3,13 +3,13 @@
 
 <head>
     <meta charset="utf-8">
-    <title>JRostand stade reperes</title>
+    <title>Reperes</title>
     <link rel="stylesheet" type="text/css" href="./style.css" />
 </head>
 
 <body>
 
-    <h1>JRostand Reperes Stade</h1>
+    <h1>Reperes</h1>
     <hr>
     <div id="map">...</div>
 
@@ -17,43 +17,65 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7Y32T_PJHZxYcK3BJYJFNwSl6cuvLXpo&callback=loadDoc&v=weekly" defer   ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-
-       
-        
-        
         var markers;
-
+        google.maps.event.addDomListener(window, 'load', loadDoc);
         // when page is API google maps is complete, process for the map!
         // Ajax avec JQuery
     function loadDoc() {
         $.ajax({
-                url: // TODO1,
-                method: // TODO2,
-                dataType: // TODO3,
-                success: function(markers){
-                    // TODO4 :
-                            /* markers representera un objet JSON retourné par le serveur */
-                            /*
-                                compléter le code de la fonction afin d'afficher les chaque coordonnée  à la console
-                            */
-
-                            /*
-                                vous utiliserez deux boucles for
-                                - boucle for classique sur markers
-                                - boucle for in sur marker
-                             */
-
-                            /*
-                                Créer des markers Google avec l'API Google Maps en utilisant l'objet renvoyé par
-                                le serveur web. Afficher votre map.
-                             */
-                    // fin  TODO4
+                url: "markersJrostand.json",
+                method: "GET",
+                dataType: "json",
+                success: function(dataMarkers){
+                    markers = dataMarkers;
+                    for(let i = 0; i < markers.length; i++){
+                        let marker = markers[i];
+                        for(key in marker){
+                            console.log(key + ":" + marker[key]);
+                    }
+                    console.log("____________");
                         }
+                    initMap();
             }
-        );
-    };
+         });
+    }
+    function initMap(){
+        var options = {
+            center: new google.maps.LatLng(48.95930033308523, 2.5477890651742516),
+            zoom: 15,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("map"), options);
+        var path = [];
+        for (let i = 0; i < markers.length; i++) {
+            let latlng = markers[i];
+            let point = new google.maps.LatLng(latlng.lat, latlng.lng);
+            path.push(point);
 
-    </script>
+            let marker = new google.maps.Marker({
+                position: point,
+                map: map,
+                title: 'Marker ' + latlng.id
+            });
+            let infowindow = new google.maps.InfoWindow({
+                content: 'ID du marker : ' + latlng.id
+            });
+            marker.addListener('click', function() {
+                infowindow.open(map, marker);
+            });
+        }
+        if (path.length > 1) {
+            var parcours = new google.maps.Polyline({
+                path: path,
+                geodesic: true,
+                strokeColor: '#FF0000',
+                strokeOpacity: 1.0,
+                strokeWeight: 2
+            });
+            parcours.setMap(map);
+        }
+    }
+</script>
 
 
 </body>

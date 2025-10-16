@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Runnin Attack</title>
+    <link href="css/style.css" rel="stylesheet">
+    <script>
+        function checkPassword() {
+            const modal = document.getElementById('passwordModal');
+            modal.style.display = 'flex';
+        }
+
+        function validatePassword() {
+            const password = document.getElementById('passwordInput').value;
+            const correctPassword = "vip";
+
+            if (password === correctPassword) {
+                document.body.style.display = 'block';
+                document.getElementById('passwordModal').style.display = 'none';
+            } else {
+                alert("Mot de passe incorrect.");
+            }
+        }
+
+        window.onload = checkPassword;
+    </script>
+</head>
+<body>
+    <div id="passwordModal">
+        <div class="modal-content">
+            <h2>Espace VIP</h2>
+            <input type="password" id="passwordInput" placeholder="Mot de passe" />
+            <button onclick="validatePassword()">Valider</button>
+        </div>
+    </div>
+
+    <header class="main-header">
+        <div class="logo"></div>
+        <nav class="desktop-main-menu">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="connexion.html">Connectez-vous</a></li>
+                <li><a href="inscription.html">Inscription</a></li>
+                <li><a href="VIP.html">VIP</a></li>
+                <li><a href="boutique.html">Boutique</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="shop">
+        <div class="shop-inner">
+            <h2>VIP Exclusive</h2>
+
+            <div class="product-list">
+
+                <div class="product">
+                    <img src="img/bas.jpg" alt="Bas Running" />
+                    <h3>Bas Running Édition VIP</h3>
+                    <p>Modèle ultra limité, conçu pour les membres VIP seulement.</p>
+                    <span class="price">150.00€</span>
+                    <button class="add-to-cart">Ajouter au panier</button>
+                </div>
+
+                <div class="product">
+                    <img src="img/veste.jpg" alt="Veste Running" />
+                    <h3>Veste Running Prestige</h3>
+                    <p>Design exclusif en blanc glacial, édition ultra premium.</p>
+                    <span class="price">170.00€</span>
+                    <button class="add-to-cart">Ajouter au panier</button>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

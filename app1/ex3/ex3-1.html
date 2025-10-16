@@ -3,57 +3,79 @@
 
 <head>
     <meta charset="utf-8">
-    <title>JRostand stade reperes</title>
+    <title>Reperes</title>
     <link rel="stylesheet" type="text/css" href="./style.css" />
 </head>
 
 <body>
 
-    <h1>JRostand Reperes Stade</h1>
+    <h1>JRostand Reperes</h1>
     <hr>
     <div id="map">...</div>
 
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7Y32T_PJHZxYcK3BJYJFNwSl6cuvLXpo&callback=loadDoc&v=weekly" defer   ></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
+<script
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7Y32T_PJHZxYcK3BJYJFNwSl6cuvLXpo&callback=loadDoc&v=weekly"
+  defer
+></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-       
-        
-        
-        var markers;
+<script>
+  var markers; 
 
-        // when page is API google maps is complete, process for the map!
-        // Ajax avec JQuery
-    function loadDoc() {
-        $.ajax({
-                url: // TODO1,
-                method: // TODO2,
-                dataType: // TODO3,
-                success: function(markers){
-                    // TODO4 :
-                            /* markers representera un objet JSON retourné par le serveur */
-                            /*
-                                compléter le code de la fonction afin d'afficher les chaque coordonnée  à la console
-                            */
 
-                            /*
-                                vous utiliserez deux boucles for
-                                - boucle for classique sur markers
-                                - boucle for in sur marker
-                             */
+  function loadDoc() {
+    $.ajax({
+      url: "markersJrostand.json",         
+      method: "GET",                       
+      dataType: "json",                    
 
-                            /*
-                                Créer des markers Google avec l'API Google Maps en utilisant l'objet renvoyé par
-                                le serveur web. Afficher votre map.
-                             */
-                    // fin  TODO4
-                        }
-            }
-        );
+      success: function (data) {
+        markers = data;                  
+
+
+        for (let i = 0; i < markers.length; i++) {
+          let marker = markers[i];
+          for (let key in marker) {
+            console.log(key + " : " + marker[key]);
+          }
+          console.log("___________");
+        }
+
+
+        initMap(markers);
+      }
+    });
+  }
+
+
+  function initMap(markers) {
+    var options = {
+      center: new google.maps.LatLng(48.95930033308523, 2.5477890651742516),
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
-    </script>
+    var map = new google.maps.Map(document.getElementById("map"), options);
+
+
+    for (let i = 0; i < markers.length; i++) {
+      let coord = markers[i];
+
+      let marker = new google.maps.Marker({
+        position: coord,
+        map: map
+      });
+
+
+      google.maps.event.addListener(marker, "click", function () {
+        alert(" n°" + (i + 1));
+      });
+    }
+  }
+
+
+
+</script>
 
 
 </body>

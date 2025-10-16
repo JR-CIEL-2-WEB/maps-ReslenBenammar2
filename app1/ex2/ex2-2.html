@@ -1,0 +1,89 @@
+<html>
+
+</html>
+
+<head>
+  <title>Simple Markers</title>
+
+  <link rel="stylesheet" type="text/css" href="./style.css" />
+  <script type="module" src="./index.js"></script>
+</head>
+
+<body>
+  <div id="map"></div>
+
+  <!-- 
+      The `defer` attribute causes the script to execute after the full HTML
+      document has been parsed. For non-blocking uses, avoiding race conditions,
+      and consistent behavior across browsers, consider loading using Promises. See
+      https://developers.google.com/maps/documentation/javascript/load-maps-js-api
+      for more information.
+      -->
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7Y32T_PJHZxYcK3BJYJFNwSl6cuvLXpo&callback=initMap&v=weekly"
+    defer></script>
+  <script>
+    function initMap() {
+      const Lycée = { lat: 48.958522, lng:2.546682 };
+      const stade1 = { lat: 48.95890, lng:2.54420 };
+      const stade2 = { lat: 48.961768, lng:2.553526 };
+      const stade3 = { lat: 48.95995, lng:2.548510 };
+      const stade4 = { lat: 48.95930033308523, lng:2.5477890651742516 };
+      const stade5 = { lat: 48.96259, lng:2.546761 };
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 15,
+        center: Lycée,
+      });
+
+      new google.maps.Marker({
+        position: Lycée,
+        map,
+        title: "Lycée",
+
+        
+      })
+      ;
+     new google.maps.Marker({
+        position: stade1,
+        map,
+        title: "stade",
+    });
+     new google.maps.Marker({
+        position: stade2,
+        map,
+        title: "stade",
+    });
+
+         new google.maps.Marker({
+        position: stade3,
+        map,
+        title: "stade",
+    });
+
+         new google.maps.Marker({
+        position: stade4,
+        map,
+        title: "stade",
+    });
+
+         new google.maps.Marker({
+        position: stade5,
+        map,
+        title: "stade",
+    });
+
+
+
+
+
+
+
+
+
+}
+
+    window.initMap = initMap;
+  </script>
+</body>
+
+</html>

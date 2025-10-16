@@ -228,9 +228,15 @@
 	document.getElementById("Button1").addEventListener('click',readTab);
 
 	function readTab(){
-       //TODO
+  var cds = JSON.parse(CDs);  // transforme la string JSON en tableau JS
 
-	}
+                for(let i = 0; i < cds.length; i++) {
+                    let CD = cds[i];
+                    console.log("CD #" + (i+1) + ":");
+                    for(let key in CD) {
+                        console.log("  " + key + ": " + CD[key]);
+                    }
+}}
 
 </script>
 

@@ -22,49 +22,6 @@
     var markers;
 
     // Ajax avec JQuery
-    function loadDoc() {
-        $.ajax({
-                url: "markersJrostand.json",
-                method: "GET",
-                //data: { id : menuId },
-                dataType: "json",
-                success: function(dataMarkers){
-                            markers = dataMarkers;
-                            for(let i = 0; i < markers.length;i++){
-                                let marker = markers[i];
-                                for(key in markers[i]){
-                                    console.log(key + ":" + marker[key]);
-                                }
-                                console.log("____________");
-                            }
-                            initMap();
-                        }
-            }
-        );
-    }
-
-   function initMap(){
-       var options = {
-           center: new google.maps.LatLng(48.95930033308523, 2.5477890651742516),
-           zoom: 15,
-           mapTypeId: google.maps.MapTypeId.ROADMAP
-       };
-
-       /*
-           Constructeur de la map qui prend en paramêtre le conteneur HTML
-           dans lequel la map doit s'afficher et les options
-       */
-       var map = new google.maps.Map(document.getElementById("map"), options);
-
-       // On positionne les marqueurs sur la carte
-       for (let i = 0; i < markers.length; i++) {
-           let latlng = markers[i];
-           new google.maps.Marker({
-               position: latlng,
-               map : map
-           });
-       }
-    }
 
 
 </script>

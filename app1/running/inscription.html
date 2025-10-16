@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Runnin Attack - Inscription</title>
+    <link href="css/style3.css" rel="stylesheet">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="logo">      
+        </div>
+
+        <nav class="desktop-main-menu">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="connexion.html">Connectez-vous</a></li>
+                <li><a href="inscription.html">Inscription</a></li>
+                <li><a href="VIP.html">VIP</a></li>
+                <li><a href="boutique.html">boutique</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="section-a">
+        <div class="form-container">
+            <h1>Inscription</h1>
+                <div class="form-group">
+                    <label for="name">Nom complet</label>
+                    <input type="text" id="name" name="name" placeholder="Votre nom" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Votre email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" name="password" placeholder="Votre mot de passe" required>
+                </div>
+                <div class="form-group">
+                    <label for="level">Niveau de course</label>
+                    <select id="level" name="level" required>
+                        <option value="">Sélectionnez votre niveau</option>
+                        <option value="beginner">Débutant</option>
+                        <option value="intermediate">Intermédiaire</option>
+                        <option value="advanced">Avancé</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-submit">S'inscrire</button>
+            </form>
+            <div class="form-footer">
+                Déjà inscrit ? <a href="connexion.html">Connectez-vous</a>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

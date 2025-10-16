@@ -1,0 +1,118 @@
+<!DOCTYPE html >
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>json Employes</title>
+</head>
+<body>
+
+<h1>JRostand Reperes Stade</h1>
+<hr>
+<div id="map">...</div>
+<style type="text/css">
+    /* Always set the map height explicitly to define the size of the div
+     * element that contains the map. */
+    #map {
+        height: 100%;
+    }
+
+    /* Optional: Makes the sample page fill the window. */
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+</style>
+
+<script   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7Y32T_PJHZxYcK3BJYJFNwSl6cuvLXpo&callback=initMap"></script>
+<script  src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+// Au chargement de la page
+window.onload = loadDoc;
+
+// Ajax avec JQuery
+function loadDoc() {
+    $.ajax({
+        url: "markersJrostand.json",
+        method: "GET",
+        dataType: "json",
+        success: function(markers){
+            // Boucle for classique
+            for (let i = 0; i < markers.length; i++) {
+                let marker = markers[i];
+
+                // Boucle for...in sur chaque marker
+                for (let key in marker) {
+                    console.log(key + ": " + marker[key]);
+                }
+                console.log("___________");
+            }
+
+            // Création et affichage de la map
+            initMap(markers);
+        },
+        error: function(error) {
+            console.error("Erreur de chargement du fichier JSON:", error);
+        }
+    });
+}
+
+function initMap(markers) {
+    const options = {
+        center: new google.maps.LatLng(48.95930033308523, 2.5477890651742516),
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
+    const map = new google.maps.Map(document.getElementById("map"), options);
+    
+    // Créer une seule InfoWindow réutilisable
+    const infoWindow = new google.maps.InfoWindow();
+
+    // Tableau pour stocker les positions pour la polyline
+    const polylinePath = [];
+
+    // Affichage des markers
+    for (let i = 0; i < markers.length; i++) {
+        const markerData = markers[i];
+        
+        // Créer la position (seulement lat et lng)
+        const position = {
+            lat: markerData.lat,
+            lng: markerData.lng
+        };
+        
+        // Ajouter la position au chemin de la polyline
+        polylinePath.push(position);
+        
+        // Créer le marker
+        const marker = new google.maps.Marker({
+            position: position,
+            map: map,
+            title: `Marker ${markerData.id}`
+        });
+
+        // Ajouter un écouteur de clic pour afficher l'InfoWindow avec l'ID
+        marker.addListener("click", function() {
+            infoWindow.setContent(`<div style="padding: 5px;"><strong>ID: ${markerData.id}</strong></div>`);
+            infoWindow.open(map, marker);
+        });
+    }
+
+    // Ajout de la polyline
+    const polyline = new google.maps.Polyline({
+        path: polylinePath,
+        geodesic: true,
+        strokeColor: "#FF0000",
+        strokeOpacity: 1.0,
+        strokeWeight: 2,
+    });
+
+    polyline.setMap(map);
+}
+</script>
+
+</body>
+</html>

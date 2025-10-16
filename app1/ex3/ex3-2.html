@@ -1,83 +1,91 @@
-<!DOCTYPE html >
+<!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
-    <title>JRostand stade reperes</title>
+    <title>Mon lieu</title>
+    <style>
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        img.info-image {
+            width: 200px;
+            height: auto;
+            margin-top: 10px;
+            border-radius: 8px;
+        }
+    </style>
 </head>
+
 <body>
 
-<h1>JRostand Reperes Stade</h1>
-<hr>
-<div id="map">...</div>
+    <h1>Mon lieu</h1>
+    <div id="map"></div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7Y32T_PJHZxYcK3BJYJFNwSl6cuvLXpo&callback=initMap&v=weekly" defer></script>
+
+    <script>
+        const markers = [
+            {
+                id: 1,
+                name: "Djerba",
+                description: "Djerba est une île de la côte tunisienne connue pour ses plages méditerranéennes.",
+                lat: 33.812462,
+                lng: 10.878882,
+                image: "data:image/jpeg;base64,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"
+            },
 
 
-<script   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7Y32T_PJHZxYcK3BJYJFNwSl6cuvLXpo&callback=initMap"></script>
-<script  src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
 
-    // au chargement de la page
-    //window.onload = loadDoc();
-    // when page is ready, initialize the map!
-    google.maps.event.addDomListener(window, 'load', loadDoc());
-    var markers;
+        ];
 
-    // Ajax avec JQuery
-    function loadDoc() {
-        $.ajax({
-                url: "markersJrostand.json",
-                method: "GET",
-                //data: { id : menuId },
-                dataType: "json",
-                success: function(dataMarkers){
-                            markers = dataMarkers;
-                            for(let i = 0; i < markers.length;i++){
-                                let marker = markers[i];
-                                for(key in markers[i]){
-                                    console.log(key + ":" + marker[key]);
-                                }
-                                console.log("____________");
-                            }
-                            initMap();
-                        }
+        function initMap() {
+            const mapOptions = {
+                center: new google.maps.LatLng(33.812462, 10.878882),
+                zoom: 10,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+
+            const map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+            // Création des marqueurs
+            for (let i = 0; i < markers.length; i++) {
+                const data = markers[i];
+                const position = new google.maps.LatLng(data.lat, data.lng);
+
+                const marker = new google.maps.Marker({
+                    position: position,
+                    map: map,
+                    title: data.name
+                });
+
+                const infowindow = new google.maps.InfoWindow({
+                    content: `
+                        <div>
+                            <h3>${data.name}</h3>
+                            <p>${data.description}</p>
+                            <img src="${data.image}" alt="${data.name}" class="info-image" />
+                        </div>
+                    `
+                });
+
+                marker.addListener("click", function () {
+                    infowindow.open(map, marker);
+                });
             }
-        );
-    }
-
-   function initMap(){
-       var options = {
-           center: new google.maps.LatLng(48.95930033308523, 2.5477890651742516),
-           zoom: 15,
-           mapTypeId: google.maps.MapTypeId.ROADMAP
-       };
-
-
-        /*****   Markers  *****/
-
-       var map = new google.maps.Map(document.getElementById("map"), options);
-
-       // On positionne les marqueurs sur la carte
-       for (let i = 0; i < markers.length; i++) {
-           let latlng = markers[i];
-           new google.maps.Marker({
-               position: latlng,
-               map : map
-           });
-       }
-
-       /**** Polylines *****/
-       const flightPath = new google.maps.Polyline({
-           path: markers,
-           geodesic: true,
-           strokeColor: "#FF0000",
-           strokeOpacity: 1.0,
-           strokeWeight: 2,
-       });
-       flightPath.setMap(map);
-    }
-
-
-</script>
-
+        }
+    </script>
 
 </body>
+
 </html>

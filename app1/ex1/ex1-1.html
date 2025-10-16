@@ -28,9 +28,13 @@
 	var i;
 	document.getElementById("Button1").addEventListener('click',readTab);
 
-	function readTab(){
-				//TODO
-	}
+	function readTab() {
+  		var cd = JSON.parse(CD);   
+  		for (const cle in cd) {    
+    		console.log(cle + " : " + cd[cle]);   
+  }
+}
+
   
 </script>
 

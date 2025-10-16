@@ -30,22 +30,24 @@
     }
 
     function loadCourses() {
-      $.ajax({
-        url: 'courses.json',
-        method: 'GET',
-        dataType: 'json',
-        success: function(data) {
-          allCourses = data;
-          const select = $('#courseSelect');
-          data.forEach(course => {
-            select.append(`<option value="${course.id}">${course.name}</option>`);
-          });
-        },
-        error: function() {
-          alert('Erreur de chargement du fichier JSON.');
-        }
+  $.ajax({
+    url: 'courses.json',
+    method: 'GET',
+    dataType: 'json',
+    success: function(data) {
+      allCourses = data.courses;  // <-- récupère la liste dans la clé courses
+      const select = $('#courseSelect');
+      allCourses.forEach(course => {
+        select.append(`<option value="${course.id}">${course.name}</option>`);
       });
+    },
+    error: function() {
+      alert('Erreur de chargement du fichier JSON.');
     }
+  });
+}
+
+    
 
     function displayCourse(courseId) {
       const course = allCourses.find(c => c.id == courseId);

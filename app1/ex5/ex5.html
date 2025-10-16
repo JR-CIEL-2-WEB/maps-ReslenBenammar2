@@ -8,13 +8,15 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7Y32T_PJHZxYcK3BJYJFNwSl6cuvLXpo"></script>
 </head>
 <body>
-  <h1>Courses</h1>
+  <h1>Courses à pied - Carte interactive</h1>
   <label for="courseSelect">Choisissez une course :</label>
   <select id="courseSelect">
     <option value="">-- Sélectionner --</option>
   </select>
 
-  <div id="map"></div>
+  <div id="map">
+
+  </div>
 
   <script>
     let map, polyline;
@@ -22,7 +24,7 @@
 
     function initMap() {
       map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: 48.8592, lng: 2.3500 }, // Paris par défaut
+        center: { lat: 48.8592, lng: 2.3540 }, // Paris par défaut
         zoom: 12
       });
     }

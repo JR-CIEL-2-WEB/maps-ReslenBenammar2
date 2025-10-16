@@ -2,20 +2,7 @@
   "courses": [
     {
       "id": 1,
-      "name": "course 1 – Tokyo (Shinjuku Gyoen)",
-      "markers": [
-        { "lat": 35.685175, "lng": 139.710052 },
-        { "lat": 35.684000, "lng": 139.712000 },
-        { "lat": 35.683000, "lng": 139.714000 },
-        { "lat": 35.682000, "lng": 139.712500 },
-        { "lat": 35.682500, "lng": 139.710500 },
-        { "lat": 35.684000, "lng": 139.709500 },
-        { "lat": 35.685175, "lng": 139.710052 }
-      ]
-    },
-    {
-      "id": 2,
-      "name": "course 2 – Paris (Bois de Boulogne)",
+      "name": "course 1 – Paris (Bois de Boulogne)",
       "markers": [
         { "lat": 48.864716, "lng": 2.252980 },
         { "lat": 48.865500, "lng": 2.255000 },
@@ -28,6 +15,21 @@
         { "lat": 48.864716, "lng": 2.252980 }
       ]
     },
+
+        {
+      "id": 2,
+      "name": "course 2 – Tokyo (Shinjuku Gyoen)",
+      "markers": [
+        { "lat": 35.685175, "lng": 139.710052 },
+        { "lat": 35.684000, "lng": 139.712000 },
+        { "lat": 35.683000, "lng": 139.714000 },
+        { "lat": 35.682000, "lng": 139.712500 },
+        { "lat": 35.682500, "lng": 139.710500 },
+        { "lat": 35.684000, "lng": 139.709500 },
+        { "lat": 35.685175, "lng": 139.710052 }
+      ]
+    },
+
     {
       "id": 3,
       "name": "course 3 – Sydney (Centennial Park)",
